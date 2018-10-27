@@ -15,6 +15,12 @@ public abstract class Shape{
 	
 	
 	//CONSTRUCTORES
+	protected Shape() {
+		this.color = null;
+		this.point = null;
+	}
+	
+	
 	protected Shape(Color color, Point point) {  // Constructor con modificado protegido, funciona con normalidad
 		this.color = color;
 		this.point = point;

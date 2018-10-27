@@ -20,10 +20,17 @@ public class Rectangle extends Shape { // Resctangulo
 	protected static final int RADIO_BLOQUE = 7;
 	protected static final int POSICION_INICIAL_BLOQUE = 150;
 	protected static final int LIMITE_X_ULTIMO_BLOQUE = 630;
+	protected static final int LIMITE_Y_ULTIMO_BLOQUE = 230;
 	
 	
 
 	// CONSTRUCTOR
+	public Rectangle() {
+		this.alto = ALTO_BLOQUE;
+		this.ancho = ANCHO_BLOQUE;
+		this.radioBloque = RADIO_BLOQUE;
+	}
+	
 	public Rectangle(double alto, double ancho, Point point, Color color) {
 		super(color, point);
 		this.alto = alto;
@@ -37,6 +44,7 @@ public class Rectangle extends Shape { // Resctangulo
 		this.ancho = ancho;
 		this.radioBloque = radioBloque;
 	}
+	
 	
 
 	// GETTERS
@@ -97,6 +105,7 @@ public class Rectangle extends Shape { // Resctangulo
 	/*Esta funcion se encargara de crear los bloques para que la pelota los destruya.
 	 * */
 	public void mostrarVariosBloques() {
+		
 		pappletPaleta.noStroke();
 		for(int i = (int) point.getX();i <= LIMITE_X_ULTIMO_BLOQUE; i = i + POSICION_INICIAL_BLOQUE) {
 			pappletPaleta.fill(getColor().getRed(), getColor().getGreen(), getColor().getBlue()); 

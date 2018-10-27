@@ -150,7 +150,7 @@ public class Circle extends Shape { // Circulo
 			getPapplet().fill(0, 0, 200);
 			getPapplet().text(mensajeReinicioFin, 330, 450);
 			reinicioJuego();  // Llamara a la funcion para reiniciar el juego o salir de el.	
-			detenerPelota();  // FALTA TERMINAR ESTA FUNCION
+			fueraDetenerPelota();  // Se encarga de sacar la pelota cuando ya no se tenga mas partidas.
 		}	
 	}
 	
@@ -167,9 +167,10 @@ public class Circle extends Shape { // Circulo
 		}  		
 	} 
 	
-	private void detenerPelota() {  //FALTA TERMINAR
-		//getPappletPelota().noLoop();
-		getPappletPelota();
+	//Este metodo se encarga de sacar la pelota del escenario cuando yano quedan mas partidas y pierdes el juego
+	private void fueraDetenerPelota() { 
+		velocX = getVelocX() * -10;
+		velocY = getVelocY() * -10;
 	}
 	
 	

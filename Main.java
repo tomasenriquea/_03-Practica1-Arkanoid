@@ -62,7 +62,7 @@ public class Main extends PApplet {
 		 * @param ubicacionY, sera la ubicacion Y de las filas de bloques a crear y
 		 * @param Rectangle.ALTO_BLOQUE, en este caso sera la ubicacion X del bloque que sera fija.
 		 */
-		for(int indice = 0, ubicacionY = 30; indice < 6 && ubicacionY <= 230; indice++, ubicacionY = ubicacionY + 40) {
+		for(int indice = 0, ubicacionY = Rectangle.ALTO_BLOQUE; indice < 6 && ubicacionY <= Rectangle.LIMITE_Y_ULTIMO_BLOQUE; indice++, ubicacionY += 40) {
 			point3[indice] = new Point(Rectangle.ALTO_BLOQUE, ubicacionY);
 		}
 		
