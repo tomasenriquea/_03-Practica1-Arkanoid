@@ -2,24 +2,30 @@ package uF4.practicas._01_10_10_2018._03;
 
 import processing.core.PApplet;
 
+
 public class Main extends PApplet {
 
 	Circle pelota = null; // crea la pelota pero no se le asigna espacio de memoria.
 	Rectangle paleta = null; // Crea la paleta pero no se le asigna espacio de memoria.
 	float rebote = 0.0f; // Sera el valor devuelto que controlara el rebote de la pelota con la paleta.
-
+	
+	Rectangle bloques[];  //Array de bloques.
+	
 	boolean tocaSuelo = false;  // boleano que nos servira para saber cuando la pelota toca el suelo.
 	int contadorTocaSuelo;  // Contador de veces que la pelota toca el suelo.
 	
 	boolean vecesRebotes = false; // boleano que nos servira para saber cuando la pelota toca la paleta.
 	int rebotesPuntos;  // cantidad de veces que rebota la pelota con la paleta o la puntuacion generada por ello.
 
+	
+	
 	public static void main(String[] args) {
 		String[] mainArgs = { "Fronton" };
 		Main main = new Main(); // se llama a la clase principal Main
 		PApplet.runSketch(mainArgs, main);
 	}
 
+	
 	@Override
 	public void settings() {
 		size(Shape.TAMANYO_PANTALLA, Shape.TAMANYO_PANTALLA); // aqui se pondra el tamaño de la pantalla.
@@ -28,6 +34,7 @@ public class Main extends PApplet {
 		Shape.setPapplet(this);  // Servira para poner el texto en pantalla.
 	}
 
+	
 	@Override
 	public void setup() {
 		// Color y ubicación de inicio de la pelota, mas su implementación con su velocidad de movimiento.
@@ -36,18 +43,42 @@ public class Main extends PApplet {
 		pelota = new Circle(Circle.VELOCIDAD_X, Circle.VELOCIDAD_Y, point, color);
 
 		// Esto son el color y ubicacion de la paleta, mas su implementación con movimiento y ubicación
-		Color color2 = new Color(Circle.COLOR_NEUTRO, Circle.COLOR_PRECISO, Circle.COLOR_NEUTRO);
+		Color color2 = new Color(123, 104, 238);  // Color  Medium SlateBlue
 		Point point2 = new Point(Rectangle.UBICACION_PALETA_X, Rectangle.UBICACION_PALETA_Y);
 		paleta = new Rectangle(Rectangle.ALTO_PALETA, Rectangle.ANCHO_PALETA, point2, color2);
 
 		contadorTocaSuelo = 0;  // Inicializado el contador de veces que la pelota toca el suelo.
 		rebotesPuntos = 0;  // Inicializado el contador de puntuacion por rebote de la pelota con la paleta.
 		
+		
+		//-----------------------------------------------------------------------
+		//Codigo de los bloques
+		Color color3 = new Color(173, 255, 47);  // color de bloques GreenYellow
+		Point point3[] = new Point[6];  // Array de coordenadas de ubicación de bloques
+		bloques = new Rectangle[6];  // Array de objetos de bloques a crear
+		
+		/** Aqui se asigna la ubicacion de cada bloque a crear donde: 
+		 * @param indice, sera la cantidad de objetos point a crear
+		 * @param ubicacionY, sera la ubicacion Y de las filas de bloques a crear y
+		 * @param Rectangle.ALTO_BLOQUE, en este caso sera la ubicacion X del bloque que sera fija.
+		 */
+		for(int indice = 0, ubicacionY = 30; indice < 6 && ubicacionY <= 230; indice++, ubicacionY = ubicacionY + 40) {
+			point3[indice] = new Point(Rectangle.ALTO_BLOQUE, ubicacionY);
+		}
+		
+		//Aqui se crean las filas de bloques
+		for(int i = 0; i < 6; i++) {
+			bloques[i] = new Rectangle(Rectangle.ALTO_BLOQUE, Rectangle.ANCHO_BLOQUE, point3[i], color3, Rectangle.RADIO_BLOQUE);
+		}
+		
+		
 
 	}
 
+	
+	@Override
 	public void draw() {
-		background(Circle.COLOR_PRECISO); // el color de fondo
+		background(211,211,211); // el color de fondo lightGrey
 		pelota.dibujarFigura(); // se dibuja la pelota.
 		pelota.movimientoFigura(); // se llama a su metodo de movimiento.
 
@@ -71,6 +102,16 @@ public class Main extends PApplet {
 			rebotesPuntos+= Circle.PUNTOS_REBOTE_PALETA;  // aumenta la puntiacion en 10.
 		}
 		pelota.cantidadPuntosObtenidos(rebotesPuntos);  // muestra los puntos obtenidos por rebote de la paleta con la pelota.
+		
+		
+		//-----------------------------------------------------------------------
+		//Codigo de los bloques
+		for(int i = 0; i < 6; i++) {
+			bloques[i].mostrarVariosBloques();
+		}
+		
+		
+		
 		
 
 	}

@@ -7,12 +7,21 @@ public class Rectangle extends Shape { // Resctangulo
 	private double alto, ancho;
 	private double ubicacionPaletaX;
 	private static PApplet pappletPaleta;
+	private int radioBloque;
 
 	protected static final int ANCHO_PALETA = 200;
 	protected static final int ALTO_PALETA = 30;
 	protected static final int UBICACION_PALETA_X = -100;
 	protected static final int UBICACION_PALETA_Y = Shape.TAMANYO_PANTALLA - 100;
 	protected static final int UBICACION_PALETA_CENTRO = Shape.TAMANYO_PANTALLA + 400;
+	
+	protected static final int ANCHO_BLOQUE = 140;
+	protected static final int ALTO_BLOQUE = 30;
+	protected static final int RADIO_BLOQUE = 7;
+	protected static final int POSICION_INICIAL_BLOQUE = 150;
+	protected static final int LIMITE_X_ULTIMO_BLOQUE = 630;
+	
+	
 
 	// CONSTRUCTOR
 	public Rectangle(double alto, double ancho, Point point, Color color) {
@@ -21,6 +30,14 @@ public class Rectangle extends Shape { // Resctangulo
 		this.ancho = ancho;
 		this.ubicacionPaletaX = point.getX();
 	}
+	
+	public Rectangle(double alto, double ancho, Point point, Color color, int radioBloque) {
+		super(color, point);
+		this.alto = alto;
+		this.ancho = ancho;
+		this.radioBloque = radioBloque;
+	}
+	
 
 	// GETTERS
 	public double getAlto() {
@@ -39,6 +56,11 @@ public class Rectangle extends Shape { // Resctangulo
 		return ubicacionPaletaX;
 	}
 
+	public int getRadioBloque() {
+		return radioBloque;
+	}
+
+	
 	// SETTER
 	public void setHW(double alto, double ancho) {
 		this.alto = alto;
@@ -53,6 +75,11 @@ public class Rectangle extends Shape { // Resctangulo
 		this.ubicacionPaletaX = ubicacionPaletaX;
 	}
 
+	public void setRadioBloque(int radioBloque) {
+		this.radioBloque = radioBloque;
+	}
+	
+	
 	// METODOS SOBREESCRITOS
 	@Override
 	public double area() {
@@ -67,6 +94,17 @@ public class Rectangle extends Shape { // Resctangulo
 	// --------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------------------------------------------------------
 
+	/*Esta funcion se encargara de crear los bloques para que la pelota los destruya.
+	 * */
+	public void mostrarVariosBloques() {
+		pappletPaleta.noStroke();
+		for(int i = (int) point.getX();i <= LIMITE_X_ULTIMO_BLOQUE; i = i + POSICION_INICIAL_BLOQUE) {
+			pappletPaleta.fill(getColor().getRed(), getColor().getGreen(), getColor().getBlue()); 
+			pappletPaleta.rect(i, point.getY(), (int)getAncho(),  (int)getAlto(), getRadioBloque());
+		}	
+	}
+	
+	
 	// --------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------------------------------------------------------
 
