@@ -14,9 +14,9 @@ public class Circle extends Shape { // Circulo
 	protected static final int COLOR_PRECISO = 255; // numero para un color preciso.
 	protected static final int COLOR_NEUTRO = 0; // numero para un color preciso.
 	protected static final int VELOCIDAD_X = 7; // Velocidad de la coordenada X
-	protected static final int VELOCIDAD_Y = 5; // Velocidad de la coordenada Y
+	protected static final int VELOCIDAD_Y = -5; // Velocidad de la coordenada Y
 	protected static final int INICIO_X = Shape.TAMANYO_PANTALLA - 400; // Inicio de la coordenada X 400
-	protected static final int INICIO_Y = Shape.TAMANYO_PANTALLA - 120; // Inicio de la coordenada Y 680
+	protected static final int INICIO_Y = Shape.TAMANYO_PANTALLA - 150; // Inicio de la coordenada Y 680
 	protected static final int NUMERO_PELOTAS = 3;  // representa la cantidad de pelotas por partida
 	protected static final int PUNTOS_REBOTE_PALETA = 10;  // representa la puntuacion por cada rebote en la paleta
 
@@ -99,8 +99,8 @@ public class Circle extends Shape { // Circulo
 	@Override
 	public void movimientoFigura() {
 		// Generara el movimiento de X e Y para la pelota.
-		x = getX() + getVelocX();
-		y = getY() - getVelocY();
+		x = getX() - getVelocX();
+		y = getY() + getVelocY();
 
 		if ((getX() > getPappletPelota().width - 10) || (getX() < 10)) { // Controla el movimiento de la coordenada X
 			velocX = getVelocX() * -1;
@@ -118,9 +118,16 @@ public class Circle extends Shape { // Circulo
 		boolean salida = false;
 		if ((getY() > Shape.TAMANYO_PANTALLA - 10)) { // esto representa la parte de 'Y' que es el suelo
 			salida = true;
+			reinicioPelota();	
 		}
 		return salida;
 	}
+	
+	private void reinicioPelota() {  // reinicia a una ubicacion inicial de la pelota
+		x = INICIO_X;
+		y = INICIO_Y;
+	}
+	
 
 	/** Sirve para que se muestre el texto en la pantalla, cantidad de pelotas por partida y fin de juego.
 	 *  @param pelotasAquitar 
@@ -137,7 +144,7 @@ public class Circle extends Shape { // Circulo
 		// para la cantidad de pelotas
 		getPapplet().textSize(20);
 		getPapplet().fill(0);
-		getPapplet().text(pelotas + cantidadPelotas, 650, 790);
+		getPapplet().text(pelotas + cantidadPelotas, 650, 20);
 		
 		if(cantidadPelotas < 1) {
 			// Para el mensaje de fin de partida
@@ -169,10 +176,9 @@ public class Circle extends Shape { // Circulo
 	
 	//Este metodo se encarga de sacar la pelota del escenario cuando yano quedan mas partidas y pierdes el juego
 	private void fueraDetenerPelota() { 
-		velocX = getVelocX() * -10;
-		velocY = getVelocY() * -10;
+		velocX = getVelocX() * 0;
+		velocY = getVelocY() * 0;
 	}
-	
 	
 
 	/**
@@ -184,12 +190,10 @@ public class Circle extends Shape { // Circulo
 		// Para la puntuacion
 		getPapplet().textSize(20);
 		getPapplet().fill(0);
-		getPapplet().text(puntuacion + puntos, 10, Shape.TAMANYO_PANTALLA - 10);	
+		getPapplet().text(puntuacion + puntos, 10, Shape.TAMANYO_PANTALLA - 780);	
 	}
 	
 	// --------------------------------------------------------------------------------------------------------
-
-	
 	// --------------------------------------------------------------------------------------------------------	
 	
 	
@@ -231,4 +235,60 @@ public class Circle extends Shape { // Circulo
 	  cuando el valor de 'x' sea mayor 'ubicacionExactaX' ---> (400 + ubicacionX)
 	 */
 
+	
+	// --------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------	
+		
+	public int choque() {
+		int bloque = 10;
+
+		if (getX() >= 30 && getX() <= 140 && getY() >= 30 && getY() <= 60) {
+			
+			x = getX() + getVelocX();
+			y = getY() - getVelocY();
+			velocX = getVelocX() * -1;  // REBOTARA LA PELOTA
+			velocY = getVelocY() * -1;
+			bloque = 0;	
+		}
+		
+		else if (getX() >= 150 && getX() <= 320 && getY() >= 30 && getY() <= 60) {
+			
+			x = getX() + getVelocX();
+			y = getY() - getVelocY();
+			velocX = getVelocX() * -1;
+			velocY = getVelocY() * -1;
+			bloque = 1;	
+		}
+		
+		else if ((x >= 330 && x <= 470) && (y <= 60 && y >= 30) ) {
+			x = getX() + getVelocX();
+			y = getY() - getVelocY();
+			velocX = getVelocX() * -1;
+			velocY = getVelocY() * -1;
+			bloque = 2;
+		}
+		
+		
+		else if ((x >= 480 && x <= 620) && (y <= 60 && y >= 30) ) {
+			x = getX() + getVelocX();
+			y = getY() - getVelocY();
+			velocX = getVelocX() * -1;
+			velocY = getVelocY() * -1;
+			bloque = 3;
+		}
+		
+		else if ((x >= 630 && x <= 770) && (y <= 60 && y >= 30) ) {
+			x = getX() + getVelocX();
+			y = getY() - getVelocY();
+			velocX = getVelocX() * -1;
+			velocY = getVelocY() * -1;
+			bloque = 4;
+		}
+		
+		return bloque;
+	}
+	
+	
+	
+	
 }

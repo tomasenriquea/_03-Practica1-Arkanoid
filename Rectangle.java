@@ -1,6 +1,7 @@
 package uF4.practicas._01_10_10_2018._03;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 public class Rectangle extends Shape { // Resctangulo
 
@@ -22,6 +23,9 @@ public class Rectangle extends Shape { // Resctangulo
 	protected static final int LIMITE_X_ULTIMO_BLOQUE = 630;
 	protected static final int LIMITE_Y_ULTIMO_BLOQUE = 230;
 	
+	protected static final int CANTODAD_FILAS_BLOQUES = 5;
+	
+
 	
 
 	// CONSTRUCTOR
@@ -105,15 +109,48 @@ public class Rectangle extends Shape { // Resctangulo
 	/*Esta funcion se encargara de crear los bloques para que la pelota los destruya.
 	 * */
 	public void mostrarVariosBloques() {
-		
 		pappletPaleta.noStroke();
 		for(int i = (int) point.getX();i <= LIMITE_X_ULTIMO_BLOQUE; i = i + POSICION_INICIAL_BLOQUE) {
 			pappletPaleta.fill(getColor().getRed(), getColor().getGreen(), getColor().getBlue()); 
-			pappletPaleta.rect(i, point.getY(), (int)getAncho(),  (int)getAlto(), getRadioBloque());
+			pappletPaleta.rect(i, point.getY(), (int)getAncho(),  (int)getAlto());
+		}	
+	}
+		
+	
+	public void borrarBloque(int posicion) { //FALTA TERMINAR
+		
+		switch (posicion) {
+		case 0:
+			
+			//pappletPaleta.rect(30, 100, (int)getAncho(),  (int)getAlto());	
+			//getPappletPaleta().background(0);
+						
+			break;
+		case 1:
+			//pappletPaleta.rect(30, 100, (int)getAncho(),  (int)getAlto());	
+			break;
+		
+		case 2:
+			
+			break;
+					
+		case 3:
+			//pappletPaleta.rect(30, 100, (int)getAncho(),  (int)getAlto());	
+			break;
+			
+		case 4:
+		
+			break;
 		}	
 	}
 	
 	
+	private void borrarBloque() {  //FALTA TERMINAR
+		
+	
+		
+	}
+
 	// --------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------------------------------------------------------
 

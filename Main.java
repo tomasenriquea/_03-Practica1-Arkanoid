@@ -1,6 +1,7 @@
 package uF4.practicas._01_10_10_2018._03;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 
 public class Main extends PApplet {
@@ -10,6 +11,9 @@ public class Main extends PApplet {
 	float rebote = 0.0f; // Sera el valor devuelto que controlara el rebote de la pelota con la paleta.
 	
 	Rectangle bloques[];  //Array de bloques.
+	int valorBloque;
+	
+	
 	
 	boolean tocaSuelo = false;  // boleano que nos servira para saber cuando la pelota toca el suelo.
 	int contadorTocaSuelo;  // Contador de veces que la pelota toca el suelo.
@@ -17,6 +21,7 @@ public class Main extends PApplet {
 	boolean vecesRebotes = false; // boleano que nos servira para saber cuando la pelota toca la paleta.
 	int rebotesPuntos;  // cantidad de veces que rebota la pelota con la paleta o la puntuacion generada por ello.
 
+	
 	
 	
 	public static void main(String[] args) {
@@ -50,29 +55,30 @@ public class Main extends PApplet {
 		contadorTocaSuelo = 0;  // Inicializado el contador de veces que la pelota toca el suelo.
 		rebotesPuntos = 0;  // Inicializado el contador de puntuacion por rebote de la pelota con la paleta.
 		
+		valorBloque = 10;  
+		
 		
 		//-----------------------------------------------------------------------
 		//Codigo de los bloques
 		Color color3 = new Color(173, 255, 47);  // color de bloques GreenYellow
-		Point point3[] = new Point[6];  // Array de coordenadas de ubicación de bloques
-		bloques = new Rectangle[6];  // Array de objetos de bloques a crear
+		Point point3[] = new Point[Rectangle.CANTODAD_FILAS_BLOQUES];  // Array de coordenadas de ubicación de bloques
+		bloques = new Rectangle[Rectangle.CANTODAD_FILAS_BLOQUES];  // Array de objetos de bloques a crear
 		
 		/** Aqui se asigna la ubicacion de cada bloque a crear donde: 
 		 * @param indice, sera la cantidad de objetos point a crear
 		 * @param ubicacionY, sera la ubicacion Y de las filas de bloques a crear y
 		 * @param Rectangle.ALTO_BLOQUE, en este caso sera la ubicacion X del bloque que sera fija.
 		 */
-		for(int indice = 0, ubicacionY = Rectangle.ALTO_BLOQUE; indice < 6 && ubicacionY <= Rectangle.LIMITE_Y_ULTIMO_BLOQUE; indice++, ubicacionY += 40) {
+		for(int indice = 0, ubicacionY = Rectangle.ALTO_BLOQUE; indice < Rectangle.CANTODAD_FILAS_BLOQUES && ubicacionY <= Rectangle.LIMITE_Y_ULTIMO_BLOQUE; indice++, ubicacionY += 40) {
 			point3[indice] = new Point(Rectangle.ALTO_BLOQUE, ubicacionY);
 		}
 		
+		
 		//Aqui se crean las filas de bloques
-		for(int i = 0; i < 6; i++) {
+		for(int i = 0; i < Rectangle.CANTODAD_FILAS_BLOQUES; i++) {
 			bloques[i] = new Rectangle(Rectangle.ALTO_BLOQUE, Rectangle.ANCHO_BLOQUE, point3[i], color3, Rectangle.RADIO_BLOQUE);
 		}
-		
-		
-
+	
 	}
 
 	
@@ -103,17 +109,14 @@ public class Main extends PApplet {
 		}
 		pelota.cantidadPuntosObtenidos(rebotesPuntos);  // muestra los puntos obtenidos por rebote de la paleta con la pelota.
 		
-		
 		//-----------------------------------------------------------------------
 		//Codigo de los bloques
-		for(int i = 0; i < 6; i++) {
+		for(int i = 0; i < Rectangle.CANTODAD_FILAS_BLOQUES; i++) {
 			bloques[i].mostrarVariosBloques();
 		}
+		valorBloque = pelota.choque();		
+		paleta.borrarBloque(valorBloque);
 		
-		
-		
-		
-
 	}
 
 }
@@ -124,7 +127,7 @@ Aprovechando el ejercicio anterior, introduzca bloques en la parte opuesta del l
 los bloques. Un bloque se destruye si toca el balón..
 
 Indicaciones:
-[] Los bloques son rectángulos.
+[x] Los bloques son rectángulos.
 
 Extra:
 Diseñar una partida de forma que:
